@@ -16,6 +16,9 @@ app.get('/', (req, res) => {
 const produtosRouter = require('./routes/produtos')
 app.use('/produtos', produtosRouter)
 
+const restaurantesRouter = require('./routes/restaurantes')
+app.use('/restaurantes', restaurantesRouter)
+
 app.listen(PORT, () => {
   console.log(`Aplicação funcionando na porta ${PORT}`)
 })
