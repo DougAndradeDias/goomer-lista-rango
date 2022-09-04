@@ -1,6 +1,7 @@
 const pool = require('../helpers/database')
 
 const express = require('express')
+const { route } = require('./produtos')
 const router = express.Router()
 
 // READ: Metodo para listar todos os restaurantes cadastrados no DB
@@ -69,6 +70,21 @@ router.delete('/:id', async (req, res) => {
     await pool.query(deleteResaturanteQuery, id)
 
     res.status(200).json('message: Registro deletado com sucesso')
+  } catch (error) {
+    res.status(400).json(error)
+  }
+})
+
+// -------------------
+
+router.get('/:id/produtos', async (req, res) => {
+  const { id } = req.params
+
+  try {
+    const readAllProductsQuery = 'SELECT * FROM relacionamentos'
+    const rows = await pool.query(readAllProductsQuery)
+
+    res.status(200).json(rows)
   } catch (error) {
     res.status(400).json(error)
   }
